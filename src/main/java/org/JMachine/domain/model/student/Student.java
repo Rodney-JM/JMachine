@@ -4,29 +4,22 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Student {
-    private String id;
-    private String name;
-    private String email;
+    private final String id;
+    private Name name;
+    private Email email;
     private StudentLevel level;
 
     public Student(String id, String name, String email, StudentLevel level) {
         if(id == null || id.isBlank()){
             throw new IllegalArgumentException("O id não pode ser vazio");
         }
-        if(name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Nome não pode ser vazio");
-        }
-        if(email == null || !email.contains("@")){
-            throw new IllegalArgumentException("Email inválido");
-        }
-
         if(level == null){
             throw new IllegalArgumentException("Level não pode ser nulo");
         }
 
         this.id = id;
-        this.name = name;
-        this.email = email;
+        this.name = new Name(name);
+        this.email = new Email(email);
         this.level = level;
     }
 
@@ -40,20 +33,20 @@ public class Student {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getName(){
+        return this.name.getValue();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = new Name(name);
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmail(){
+        return this.email.getValue();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = new Email(email);
     }
 
     public StudentLevel getLevel() {
@@ -61,6 +54,10 @@ public class Student {
     }
 
     public void setLevel(StudentLevel level) {
+        if(level == null){
+            throw new IllegalArgumentException("o level é incompatível");
+        }
+
         this.level = level;
     }
 
@@ -81,8 +78,8 @@ public class Student {
     public String toString(){
         return "Student{"+
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                ", name='" + name.getValue() + '\'' +
+                ", email='" + email.getValue() + '\'' +
                 ", level=" + level +
                 '}';
     }
