@@ -1,4 +1,4 @@
-package org.JMachine.app;
+package org.JMachine.app.usecase.student;
 
 import org.JMachine.domain.model.student.Student;
 import org.JMachine.domain.model.student.StudentLevel;

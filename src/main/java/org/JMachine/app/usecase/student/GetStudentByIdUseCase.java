@@ -1,0 +1,17 @@
+package org.JMachine.app.usecase.student;
+
+import org.JMachine.domain.model.student.Student;
+import org.JMachine.domain.repository.StudentRepository;
+
+public class GetStudentByIdUseCase {
+    private final StudentRepository repository;
+
+    public GetStudentByIdUseCase(StudentRepository r){
+        this.repository = r;
+    }
+
+    public Student execute(String id){
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Aluno não econtrado, tente novamente"));
+    }
+}
