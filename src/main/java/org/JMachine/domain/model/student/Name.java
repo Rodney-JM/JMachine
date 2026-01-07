@@ -4,9 +4,11 @@ public class Name {
     private final String value;
 
     public Name(String value){
-        if(value== null || value.isBlank()){
+        /*if(value== null || value.isBlank()){
             throw new IllegalArgumentException("Por favor, insira um nome válido");
-        }
+        }*/
+
+        //redundancia
 
         this.value = value;
     }

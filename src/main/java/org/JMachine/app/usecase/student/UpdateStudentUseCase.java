@@ -21,13 +21,15 @@ public class UpdateStudentUseCase {
 
         List<String> errors = StudentDTOValidator.validar(studentDTO);
 
-        if(errors.isEmpty()) {
-            student.setName(studentDTO.getName());
-            student.setEmail(studentDTO.getEmail());
-            student.setLevel(studentDTO.getLevel());
-
-            repository.save(student);
+        if(!errors.isEmpty()) {
+            throw new IllegalArgumentException("Errors: " + String.join(", ", errors));
         }
+
+        student.setName(studentDTO.getName());
+        student.setEmail(studentDTO.getEmail());
+        student.setLevel(studentDTO.getLevel());
+
+        repository.save(student);
         return student;
     }
 }

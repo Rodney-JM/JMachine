@@ -1,5 +1,6 @@
 package org.JMachine.app.usecase.student;
 
+import org.JMachine.app.dto.student.CreateStudentDTO;
 import org.JMachine.domain.model.student.Student;
 import org.JMachine.domain.model.student.StudentLevel;
 import org.JMachine.domain.repository.StudentRepository;
@@ -11,9 +12,9 @@ public class CreateStudentUseCase {
         this.repository = r;
     }
 
-    public Student execute(String name, String email, StudentLevel level){
-        Student student = Student.create(name, email, level);
+    public CreateStudentDTO execute(CreateStudentDTO createStudentDTO){
+        Student student = Student.create(createStudentDTO.getName(), createStudentDTO.getEmail(), createStudentDTO.getLevel());
         repository.save(student);
-        return student;
+        return new CreateStudentDTO(student.getName(), student.getEmail(), student.getLevel());
     }
 }
