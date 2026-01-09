@@ -1,17 +1,16 @@
-package org.JMachine.presentation;
+package org.JMachine.presentation.student;
 
 import org.JMachine.app.dto.student.CreateStudentDTO;
 import org.JMachine.app.usecase.student.CreateStudentUseCase;
 import org.JMachine.domain.model.student.StudentLevel;
-import org.JMachine.domain.repository.StudentRepository;
 
 import java.util.Scanner;
 
-public class StudentConsoleHandler {
+public class CreateStudentConsoleHandler {
 
     private final CreateStudentUseCase createStudent;
 
-    public StudentConsoleHandler(CreateStudentUseCase createStudent) {
+    public CreateStudentConsoleHandler(CreateStudentUseCase createStudent) {
         this.createStudent = createStudent;
     }
 
@@ -36,7 +35,7 @@ public class StudentConsoleHandler {
                 createStudent.execute(input);
 
         System.out.println(
-                "Estudante criado com sucesso: " + result.getEmail()
+                "Estudante criado com sucesso: " + result.getName()
         );
     }
 

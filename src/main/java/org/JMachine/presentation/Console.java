@@ -1,14 +1,19 @@
 package org.JMachine.presentation;
 
+import org.JMachine.presentation.student.CreateStudentConsoleHandler;
+import org.JMachine.presentation.student.ListStudentConsoleHandler;
+
 import java.util.Scanner;
 
 public class Console {
 
     private final Scanner scan = new Scanner(System.in);
-    private final StudentConsoleHandler consoleHandler;
+    private final CreateStudentConsoleHandler createStudentConsoleHandler;
+    private final ListStudentConsoleHandler listStudentConsoleHandler;
 
-    public Console(StudentConsoleHandler ch){
-        this.consoleHandler = ch;
+    public Console(CreateStudentConsoleHandler ch, ListStudentConsoleHandler lh){
+        this.createStudentConsoleHandler = ch;
+        this.listStudentConsoleHandler = lh;
     }
 
     public void start() {
@@ -40,10 +45,10 @@ public class Console {
 
             switch (answer) {
                 case "1":
-                    consoleHandler.register(scan);
+                    createStudentConsoleHandler.register(scan);
                     break;
                 case "2":
-                    System.out.println("Listar estudantes");
+                    listStudentConsoleHandler.showAll();
                     break;
                 case "3":
                     System.out.println("Cadastrar exercício");
