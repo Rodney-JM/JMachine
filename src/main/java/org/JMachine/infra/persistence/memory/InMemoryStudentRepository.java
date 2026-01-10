@@ -19,12 +19,26 @@ public class InMemoryStudentRepository implements StudentRepository {
     }
 
     @Override
+    public Optional<Student> findByEmail(String email){
+        return students.values().stream()
+                .filter(user -> user.getEmail().equalsIgnoreCase(email))
+                .findFirst();
+    }
+
+    @Override
     public List<Student> findAll(){
         return new ArrayList<>(students.values());
     }
 
     @Override
-    public void delete(String id){
+    public void deleteById(String id){
         students.remove(id);
+    }
+
+    @Override
+    public void deleteByEmail(String email) {
+        students.values().stream()
+                .filter(user -> user.getEmail().equalsIgnoreCase(email))
+                .findFirst();
     }
 }

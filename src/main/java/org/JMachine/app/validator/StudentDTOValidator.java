@@ -9,9 +9,9 @@ public class StudentDTOValidator {
     public static List<String> validar(UpdateStudentDTO studentDTO){
         List<String> errors = new ArrayList<>();
 
-        if(studentDTO.getEmail() == null || studentDTO.getEmail().isBlank() || !studentDTO.getEmail().contains("@")){
+        /*if(studentDTO.getEmail() == null || studentDTO.getEmail().isBlank() || !studentDTO.getEmail().contains("@")){
             errors.add("O email do Aluno tem que ser válido");
-        }
+        }*/
         if(studentDTO.getName() == null || studentDTO.getName().isBlank()){
             errors.add("O Nome do Aluno tem que ser válido");
         }

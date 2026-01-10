@@ -15,8 +15,8 @@ public class UpdateStudentUseCase {
         this.repository = r;
     }
 
-    public Student execute(String id, UpdateStudentDTO studentDTO){
-        Student student = repository.findById(id)
+    public Student execute(String email, UpdateStudentDTO studentDTO){
+        Student student = repository.findByEmail(email)
                 .orElseThrow(()-> new IllegalArgumentException("Aluno não encontrado"));
 
         List<String> errors = StudentDTOValidator.validar(studentDTO);
@@ -26,7 +26,7 @@ public class UpdateStudentUseCase {
         }
 
         student.setName(studentDTO.getName());
-        student.setEmail(studentDTO.getEmail());
+        student.setEmail(email);
         student.setLevel(studentDTO.getLevel());
 
         repository.save(student);
