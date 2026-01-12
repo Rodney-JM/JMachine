@@ -9,9 +9,9 @@ public class DeleteStudentUseCase {
         this.repository = r;
     }
 
-    public void executeWithId(String id){
-        repository.delete(id);
+    public void executeById(String id){
+        repository.deleteById(id);
     }
 
-    public void executeWithEmail(String email) { repository.delete(); }
+    public void executeByEmail(String email) { repository.deleteByEmail(email); }
 }

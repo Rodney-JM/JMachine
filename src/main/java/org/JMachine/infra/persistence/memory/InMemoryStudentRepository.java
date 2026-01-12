@@ -37,8 +37,11 @@ public class InMemoryStudentRepository implements StudentRepository {
 
     @Override
     public void deleteByEmail(String email) {
-        students.values().stream()
+        Optional<Student> deleteStudent = Optional.ofNullable(students.values().stream()
                 .filter(user -> user.getEmail().equalsIgnoreCase(email))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Estudante não encontrado.")));
+
+        students.remove(deleteStudent.get().getId());
     }
 }

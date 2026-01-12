@@ -1,6 +1,7 @@
 package org.JMachine.presentation;
 
 import org.JMachine.presentation.student.CreateStudentConsoleHandler;
+import org.JMachine.presentation.student.DeleteStudentConsoleHandler;
 import org.JMachine.presentation.student.ListStudentConsoleHandler;
 import org.JMachine.presentation.student.UpdateStudentConsoleHandler;
 
@@ -12,11 +13,13 @@ public class Console {
     private final CreateStudentConsoleHandler createStudentConsoleHandler;
     private final ListStudentConsoleHandler listStudentConsoleHandler;
     private final UpdateStudentConsoleHandler updateStudentConsoleHandler;
+    private final DeleteStudentConsoleHandler deleteStudentConsoleHandler;
 
-    public Console(CreateStudentConsoleHandler ch, ListStudentConsoleHandler lh, UpdateStudentConsoleHandler uh){
+    public Console(CreateStudentConsoleHandler ch, ListStudentConsoleHandler lh, UpdateStudentConsoleHandler uh, DeleteStudentConsoleHandler dh){
         this.createStudentConsoleHandler = ch;
         this.listStudentConsoleHandler = lh;
         this.updateStudentConsoleHandler = uh;
+        this.deleteStudentConsoleHandler = dh;
     }
 
     public void start() {
@@ -72,6 +75,11 @@ public class Console {
                     }
                     break;
                 case "4":
+                    try{
+                        deleteStudentConsoleHandler.delete(scan);
+                    }catch (Exception e){
+                        System.out.println("Erro ao deletar o usuário: " + e.getMessage());
+                    }
                     break;
                 case "5":
                     System.out.println("Cadastrar exercício");

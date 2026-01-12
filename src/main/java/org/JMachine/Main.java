@@ -3,6 +3,7 @@ package org.JMachine;
 import org.JMachine.infra.config.StudentConfig;
 import org.JMachine.presentation.Console;
 import org.JMachine.presentation.student.CreateStudentConsoleHandler;
+import org.JMachine.presentation.student.DeleteStudentConsoleHandler;
 import org.JMachine.presentation.student.ListStudentConsoleHandler;
 import org.JMachine.presentation.student.UpdateStudentConsoleHandler;
 
@@ -13,7 +14,8 @@ public class Main {
         CreateStudentConsoleHandler createHandler = StudentConfig.studentHandler();
         ListStudentConsoleHandler listHandler = StudentConfig.listStudentHandler();
         UpdateStudentConsoleHandler updateHandler = StudentConfig.updateStudentHandler();
-        Console console = new Console(createHandler, listHandler, updateHandler);
+        DeleteStudentConsoleHandler deleteHandler = StudentConfig.deleteStudentHandler();
+        Console console = new Console(createHandler, listHandler, updateHandler, deleteHandler);
 
         console.start();
     }
