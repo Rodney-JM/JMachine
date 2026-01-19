@@ -1,12 +1,13 @@
 package org.JMachine.domain.model.exercise;
 
-public enum QuestionType {
-    MULTIPLE_CHOICE("Múltipla Escolha"),
-    OPEN_ENDED("Dissertativa");
+public enum ExerciseDifficulty {
+    EASY("fácil"),
+    MEDIUM("médio"),
+    HARD("difícil");
 
     private final String displayName;
 
-    QuestionType(String displayName){
+    ExerciseDifficulty(String displayName){
         this.displayName = displayName;
     }
 
