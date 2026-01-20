@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDTOValidator {
-    public static List<String> validar(UpdateStudentDTO studentDTO){
+    public static List<String> validate(UpdateStudentDTO studentDTO){
         List<String> errors = new ArrayList<>();
 
         /*if(studentDTO.getEmail() == null || studentDTO.getEmail().isBlank() || !studentDTO.getEmail().contains("@")){
