@@ -1,6 +1,8 @@
 package org.JMachine.presentation.exercise;
 
+import org.JMachine.app.dto.exercise.CreateExerciseDTO;
 import org.JMachine.app.usecase.exercise.CreateExerciseUseCase;
+import org.JMachine.domain.model.exercise.Exercise;
 import org.JMachine.domain.model.exercise.ExerciseDifficulty;
 import org.JMachine.domain.model.exercise.Question;
 
@@ -33,6 +35,12 @@ public class CreateExerciseConsoleHandler extends BaseExerciseConsoleHandler {
             String topic = scan.nextLine();
 
             List<Question> questions = receiveQuestions(scan);
+
+            createExerciseUseCase.execute(new CreateExerciseDTO(title, description, difficulty, topic, questions));
+        }catch(IllegalArgumentException e){
+            System.out.println("Erro, insira os dados corretamente: " + e);
+        }catch (Exception e){
+            System.out.println("Erro: " + e);
         }
     }
 }
