@@ -3,12 +3,23 @@ package org.JMachine.presentation.exercise;
 import org.JMachine.domain.model.exercise.ExerciseDifficulty;
 import org.JMachine.domain.model.exercise.Question;
 import org.JMachine.domain.model.exercise.QuestionType;
+import org.JMachine.domain.service.GroqService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public abstract class BaseExerciseConsoleHandler {
+    private final GroqService groqService;
+
+    public BaseExerciseConsoleHandler(){
+        this.groqService = new GroqService();
+
+        if(!groqService.isAvailable()){
+            System.out.println("IA não configurada. Configure GROQ API Key");
+        }
+    }
+
     protected ExerciseDifficulty askLevel(Scanner scan){
         System.out.println("""
                 Digite o número correspondente a dificuldade do exercício:
@@ -25,7 +36,7 @@ public abstract class BaseExerciseConsoleHandler {
         };
     }
 
-    protected List<Question> receiveQuestions(Scanner scan){
+    protected List<Question> receiveQuestions(Scanner scan) throws Exception {
         List<Question> questionList = new ArrayList<>();
 
         String questionsNum;
@@ -52,7 +63,7 @@ public abstract class BaseExerciseConsoleHandler {
         return questionList;
     }
 
-    protected Question createQuestion(Scanner scan){
+    protected Question createQuestion(Scanner scan) throws Exception {
         System.out.println("===== Crie sua questão =====");
         System.out.println("Digite o número da questão: ");
 
@@ -70,14 +81,28 @@ public abstract class BaseExerciseConsoleHandler {
             throw new NumberFormatException("Digite um número válido.");
         }
 
-        String correctAnswer = "";
-
         if(questionType.equals(QuestionType.MULTIPLE_CHOICE)){
              List<String> alternatives = alternatives(scan);
+             String correctAnswer = groqService.identifyCorrectAnswer(text, alternatives);
+
+            System.out.println(correctAnswer);
+            System.out.println("A resposta da IA está correta? S/N");
+
+            String iaIsCorrect = scan.nextLine();
+            if(iaIsCorrect.equalsIgnoreCase("N")){
+                System.out.println("Então digite a alternativa correta: ");
+                correctAnswer = scan.nextLine();
+            }else if(iaIsCorrect.equalsIgnoreCase("S")){
+                System.out.println("Obrigado pela resposta, sua questão será criada para futuras consultas");
+            }
+
              return Question.createMultipleChoice(number, text, correctAnswer, alternatives);
-        }else{
+        }else if (questionType.equals(QuestionType.OPEN_ENDED)){
+            System.out.println("Qual é a resposta correta da questão? ");
+            String correctAnswer = scan.nextLine();
             return Question.createOpenEnded(number, text, correctAnswer);
         }
+        return null;
     }
 
     private QuestionType askQuestionType(Scanner scan){

@@ -160,5 +160,7 @@ public class GroqService {
         return bestMatch;
     }
 
-
+    public boolean isAvailable(){
+        return apiKey != null && !apiKey.isBlank();
+    }
 }
