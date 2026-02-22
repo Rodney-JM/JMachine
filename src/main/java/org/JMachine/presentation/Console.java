@@ -1,5 +1,6 @@
 package org.JMachine.presentation;
 
+import org.JMachine.presentation.exercise.CreateExerciseConsoleHandler;
 import org.JMachine.presentation.student.CreateStudentConsoleHandler;
 import org.JMachine.presentation.student.DeleteStudentConsoleHandler;
 import org.JMachine.presentation.student.ListStudentConsoleHandler;
@@ -15,11 +16,14 @@ public class Console {
     private final UpdateStudentConsoleHandler updateStudentConsoleHandler;
     private final DeleteStudentConsoleHandler deleteStudentConsoleHandler;
 
-    public Console(CreateStudentConsoleHandler ch, ListStudentConsoleHandler lh, UpdateStudentConsoleHandler uh, DeleteStudentConsoleHandler dh){
+    private final CreateExerciseConsoleHandler createExerciseConsoleHandler;
+
+    public Console(CreateStudentConsoleHandler ch, ListStudentConsoleHandler lh, UpdateStudentConsoleHandler uh, DeleteStudentConsoleHandler dh, CreateExerciseConsoleHandler ce){
         this.createStudentConsoleHandler = ch;
         this.listStudentConsoleHandler = lh;
         this.updateStudentConsoleHandler = uh;
         this.deleteStudentConsoleHandler = dh;
+        this.createExerciseConsoleHandler = ce;
     }
 
     public void start() {
@@ -82,7 +86,11 @@ public class Console {
                     }
                     break;
                 case "5":
-                    System.out.println("Cadastrar exercício");
+                    try{
+                        createExerciseConsoleHandler.register(scan);
+                    }catch (Exception e){
+                        System.out.println("Erro ao criar o exercício: " + e.getMessage());
+                    }
                     break;
                 case "6":
                     System.out.println("Responder exercício");

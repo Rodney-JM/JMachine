@@ -1,7 +1,9 @@
 package org.JMachine;
 
+import org.JMachine.infra.config.ExerciseConfig;
 import org.JMachine.infra.config.StudentConfig;
 import org.JMachine.presentation.Console;
+import org.JMachine.presentation.exercise.CreateExerciseConsoleHandler;
 import org.JMachine.presentation.student.CreateStudentConsoleHandler;
 import org.JMachine.presentation.student.DeleteStudentConsoleHandler;
 import org.JMachine.presentation.student.ListStudentConsoleHandler;
@@ -15,7 +17,10 @@ public class Main {
         ListStudentConsoleHandler listHandler = StudentConfig.listStudentHandler();
         UpdateStudentConsoleHandler updateHandler = StudentConfig.updateStudentHandler();
         DeleteStudentConsoleHandler deleteHandler = StudentConfig.deleteStudentHandler();
-        Console console = new Console(createHandler, listHandler, updateHandler, deleteHandler);
+
+        CreateExerciseConsoleHandler createExerciseHandler = ExerciseConfig.exerciseHandler();
+
+        Console console = new Console(createHandler, listHandler, updateHandler, deleteHandler, createExerciseHandler);
 
         console.start();
     }

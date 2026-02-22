@@ -41,6 +41,7 @@ public abstract class BaseExerciseConsoleHandler {
 
         String questionsNum;
         try{
+            System.out.println("Digite o número de questões que o exercicio possui: ");
             questionsNum = scan.nextLine();
             if(Integer.parseInt(questionsNum)<=0){
                 System.out.println("Deve haver somente uma questão");

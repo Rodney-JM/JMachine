@@ -88,7 +88,7 @@ public class GroqService {
 
         //Construindo o request body
         JsonObject requestBody = new JsonObject();
-        requestBody.addProperty("model", "llama-3.1-70b-versatile");
+        requestBody.addProperty("model", "groq/compound");
         requestBody.add("messages", messages);
         requestBody.addProperty("temperature", 0.3);
         requestBody.addProperty("max_tokens", 100);
